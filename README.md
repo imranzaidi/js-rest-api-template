@@ -1,4 +1,4 @@
-# Nodejs, Express and Mongo API Template
+# Nodejs, Express and MongoDB REST API Template
 
 A simple wiring of the above three technologies for creating an API.
 
