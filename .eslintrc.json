@@ -1,0 +1,19 @@
+{
+    "extends": "airbnb-base",
+    "rules": {
+      "arrow-body-style": ["warn", "as-needed"],
+      "comma-dangle": ["error", "never"],
+      "dot-notation": ["warn"],
+      "max-len": ["error", { "code": 120 }],
+      "no-restricted-globals": "off",
+      "one-var": "off",
+      "object-curly-newline": "off",
+      "spaced-comment": ["warn", "always", {
+        "block": {
+          "markers": ["!"],
+          "exceptions": ["*"],
+          "balanced": true
+        }
+      }]
+    }
+  }

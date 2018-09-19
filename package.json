@@ -1,0 +1,47 @@
+{
+  "name": "express-mongodb-api-template",
+  "version": "0.0.1",
+  "description": "A simple express-mongoDB REST API template",
+  "main": "server.js",
+  "author": "Imran Ali Zaidi",
+  "license": "MIT",
+  "keywords": [
+    "Nodejs",
+    "Express",
+    "MongoDB",
+    "API"
+  ],
+  "engines": {
+    "node": ">=8.9.1",
+    "npm": ">=5.5.1"
+  },
+  "scripts": {
+    "clean": "rm -rf node_modules",
+    "dev": "NODE_ENV=development; nodemon server.js",
+    "lint": "eslint .",
+    "reinstall": "npm cache clean; npm run clean; npm install",
+    "test": "mocha --recursive"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0",
+    "nodemon": "1.12.1",
+    "rewire": "^4.0.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "chalk": "^2.4.1",
+    "express": "^4.16.2",
+    "glob": "^7.1.2",
+    "helmet": "^3.9.0",
+    "lodash": "^4.17.11",
+    "method-override": "^2.3.10",
+    "mongoose": "^5.2.15",
+    "morgan": "^1.9.0",
+    "run-sequence": "^2.2.1",
+    "winston": "^2.4.0"
+  }
+}
