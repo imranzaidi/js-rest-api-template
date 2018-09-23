@@ -5,7 +5,8 @@ const utils = require('../../config/libraries/utils'),
   validation = require('../libraries/validation-utils');
 
 
-const VALID_PRIORITIES = ['a', 'b', 'c'],
+const USER_REQUIRED = 'Cannot save a task with out an associated user!',
+  VALID_PRIORITIES = ['a', 'b', 'c'],
   VALID_STATUSES = ['incomplete', 'in progress', 'completed', 'forwarded'],
   ERRORS = {
     DESCRIPTION: 'Description cannot be blank.',
@@ -15,6 +16,7 @@ const VALID_PRIORITIES = ['a', 'b', 'c'],
 
 
 const exportedObject = utils.deepFreeze({
+  USER_REQUIRED,
   VALID_PRIORITIES,
   VALID_STATUSES,
   ERRORS

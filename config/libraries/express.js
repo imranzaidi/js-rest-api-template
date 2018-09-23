@@ -6,10 +6,41 @@ const chalk = require('chalk'),
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
   helmet = require('helmet'),
+  jsonwebtoken = require('jsonwebtoken'),
   methodOverride = require('method-override'),
   path = require('path'),
   logger = require('./logger');
 
+
+/**
+ * Middleware that facilitates user login and auth.
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise<*>}
+ */
+async function addUser(req, res, next) {
+  const token = req.headers.authorization;
+  const loginOrRegister = req.originalUrl === '/login' || (
+    req.originalUrl === '/users' && req.method === 'POST'
+  );
+
+  if (!loginOrRegister) {
+    try {
+      // eslint-disable-next-line max-len
+      const { user } = await jsonwebtoken.verify(token, process.env.SECRET || 'ADFEdfiaef12345134asdfkWEFasdase1345rhASDF23');
+      req.user = user;
+    } catch (err) {
+      console.log(chalk.red('Authorization:'), err); // eslint-disable-line no-console
+
+      res.status(401);
+      return res.send({ error: err.message });
+    }
+  }
+
+  return next();
+}
 
 /**
  * Initialize middleware.
@@ -42,6 +73,8 @@ function initializeMiddleware(app, config) {
   if (config.app.env === 'development') {
     app.use(helmet.noCache());
   }
+
+  app.use(addUser);
 }
 
 /**

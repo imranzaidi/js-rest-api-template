@@ -16,6 +16,7 @@ function validateTask(task) {
   if (!task.description) {
     errorMessage.push(CONSTS.ERRORS.DESCRIPTION);
   }
+
   const isValidPriority = CONSTS.VALID_PRIORITIES.some(priority => priority === task.priority);
   if (!task.priority || !isValidPriority) {
     errorMessage.push(CONSTS.ERRORS.PRIORITY);

@@ -18,7 +18,9 @@
   "scripts": {
     "clean": "rm -rf node_modules",
     "dev": "NODE_ENV=development; nodemon server.js",
+    "dev:debug": "NODE_ENV=development; node $NODE_DEBUG_OPTION server.js",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "reinstall": "npm cache clean; npm run clean; npm install",
     "test": "mocha --recursive"
   },
@@ -32,11 +34,13 @@
     "rewire": "^4.0.1"
   },
   "dependencies": {
+    "bcrypt": "^3.0.1",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
     "express": "^4.16.2",
     "glob": "^7.1.2",
     "helmet": "^3.9.0",
+    "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.11",
     "method-override": "^2.3.10",
     "mongoose": "^5.2.15",

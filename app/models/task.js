@@ -25,7 +25,12 @@ const TaskSchema = new mongoose.Schema({
     enum: CONSTS.VALID_STATUSES,
     required: CONSTS.ERRORS.STATUS
   },
-  notes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Note' }]
+  notes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Note' }],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: CONSTS.ERRORS.USER_REQUIRED
+  }
 }, { timestamps: true });
 
 
