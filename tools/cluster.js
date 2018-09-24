@@ -12,12 +12,24 @@ if (cluster.isMaster) {
   }
 
   // start a new instance if the worker crashes
-  cluster.on('exit', (worker, code, signal) => { // eslint-disable-line no-unused-vars
-    if (code !== 0 && !worker.exitedAfterDisconnect) {
-      console.log(`Worker ${worker.id} crashed. Starting a new worker...`); // eslint-disable-line no-console
-      cluster.fork();
-    }
-  });
+  const workers = Object.values(cluster.workers);
+  const restartWorker = (workerIndex) => {
+    const worker = workers[workerIndex];
+    if (!worker) return;
+
+    worker.on('exit', () => {
+      if (!worker.exitedAfterDisconnect) return;
+      console.log(`Exited process ${worker.process.pid}`);
+
+      cluster.fork().on('listening', () => {
+        restartWorker(workerIndex + 1);
+      });
+    });
+
+    worker.disconnect();
+  };
+
+  restartWorker(0);
 } else {
   // starts the server if the cluster script is not the master process (isWorker === true)
   require('../server'); // eslint-disable-line global-require
